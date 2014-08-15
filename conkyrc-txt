@@ -46,5 +46,5 @@ TEXT
   { "full_text" : "FREQ ${freq_g}" , "color":"\#268BD2"},
   { "full_text" : "T${acpitemp} °C", "color": ${if_match ${acpitemp}<70}"\#268BD2"${else}"\#ff0000"${endif}  },
   { "full_text" : "BAT ${battery_percent BAT1}%", "color": ${if_match ${battery_percent BAT1}<30}"\#ff0000"${else}"\#00ff00"${endif} },
-  {"full_text": " ♪ [$mixer%] ", "color":"\#268BD2"},
+  { "full_text": "♪ ${texeci 1 ~/.config/i3/vol.sh}", "color":"\#268BD2"},
   { "full_text" : "${time %d/%m/%Y %H:%M}", "color": "\#00FFFF" } ],

@@ -135,7 +135,7 @@ bindsym $mod+r mode "resize"
 bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -c 111111 -d
 bindsym Control+Mod1+s exec i3-msg workspace 1 && i3lock && systemctl suspend
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 -- +10% && killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 -- +10% && killall -SIGUSR1 conky
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -- -10% && killall -SIGUSR1 i3status
 bindsym XF86HomePage exec i3-msg "workspace 1 mail; exec --no-startup-id urxvt -e mutt"
 bindsym XF86Tools exec --no-startup-id xbmc
