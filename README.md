@@ -2,9 +2,9 @@
 
 This is my current configuration, placed here for my own future reference but
 also for sharing. I really appreciated others sharing their i3 configuration on
-githib, so this is my turn to do it.
+github, so this is my turn to do it.
 
-## The specifis
+## The specifics
 
 I wanted a clean looking terminal (urxvt) nice fonts in Firefox and a minimal but
 informative statusbar. The Firefox fonts where a bit of a challenge, as it
