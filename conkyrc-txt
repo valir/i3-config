@@ -36,8 +36,7 @@ TEXT
 
 # JSON for i3bar
 
- [{ "full_text" : "Home ${fs_free /home} Free" , "color" : "\#aaaaaa" },
-  { "full_text" : "Root ${fs_free /} Free" , "color" : "\#aaaaaa" },
+ [${if_mpd_playing}{ "full_text" : "${mpd_album} - ${mpd_title}", "color" : "\#993399" },${endif}
   { "full_text" : ${if_up enp4s0}"LAN ⇑ ${upspeed enp4s0} ⇓ ${downspeed enp4s0}", "color": "\#33CC99"${else}"LAN DOWN", "color":"\#808000"${endif} },
   { "full_text" : ${if_up wlp5s0}"LAN ⇑ ${upspeed wlp5s0} ⇓ ${downspeed wlp5s0}"", "color": "\#33CC99"${else}"WAN DOWN", "color":"\#808000"${endif} },
   { "full_text" : "RAM [${membar}]" , "color" : ${if_match ${memperc}<90}"\#268BD2"${else}"\#ff0000"${endif} },
