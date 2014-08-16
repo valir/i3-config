@@ -137,8 +137,11 @@ bindsym Control+Mod1+s exec i3-msg workspace 1 && i3lock && systemctl suspend
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 -- +10%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -- -10%
+bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86HomePage exec i3-msg "workspace 1 mail; exec --no-startup-id urxvt -e mutt"
-bindsym XF86Tools exec --no-startup-id xbmc
+bindsym XF86Tools exec --no-startup-id urxvt -e ncmpcpp
 bindsym $mod+n exec --no-startup-id i3-rename-workspace
 
 assign [class="Skype"] 2 comm
