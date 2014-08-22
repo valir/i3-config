@@ -169,7 +169,7 @@ workspace "2 comm" output VGA1
 workspace "3 media" output eDP1
 workspace "4 net" output VGA1
 
-exec i3-msg "focus right; workspace 2 comm; exec --no-startup-id skype; exec no-startup-id urxvt -e irssi; workspace 1 main; exec --no-startup-id urxvt -e mutt"
+exec i3-msg "focus right; workspace 2 comm; exec --no-startup-id skype; exec no-startup-id urxvt -e ssh home; workspace 1 main; exec --no-startup-id urxvt -e mutt"
 
 
 exec_always --no-startup-id muzica.sh
