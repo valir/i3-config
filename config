@@ -135,6 +135,18 @@ bindsym $mod+r mode "resize"
 bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -c 111111 -d
 bindsym Control+Mod1+s exec i3-msg workspace 1 && i3lock && systemctl suspend
 
+mode  "(s)leep (h)ybernate (r)estart shut(d)own" {
+
+        bindsym s exec sudo systemctl suspend; mode "default"
+        bindsym h exec sudo systemctl hibernate; mode "default"
+        bindsym d exec sudo systemctl poweroff; mode "default"
+        bindsym r exec sudo systemctl reboot; mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+x mode "(s)leep (h)ybernate (r)estart shut(d)own"
+
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 -- +10%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -- -10%
 bindsym XF86AudioNext exec --no-startup-id mpc next
