@@ -4,6 +4,7 @@ exec dbus-launch dunst
 set $mod Mod4
 
 exec --no-startup-id ~/bin/lefthandmouse.sh
+exec --no-startup-id feh --bg-fill ~/Photo/scoici.jpg
 
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -132,18 +133,29 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+mode "workspaces" {
+    bindsym t workspace next; mode "default"
+    bindSym T workspace prev; mode "default"
+    bindSym Escape mode "default"
+}
+bindsym $mod+g mode "workspaces"
+workspace_auto_back_and_forth yes
+bindsym $mod+z workspace back_and_forth
+bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
+bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+
 bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -c 111111 -d
 bindsym Control+Mod1+s exec i3-msg workspace 1 && i3lock && systemctl suspend
 
 mode  "(s)leep (h)ybernate (r)estart shut(d)own" {
 
-        bindsym s exec sudo systemctl suspend; mode "default"
-        bindsym h exec sudo systemctl hibernate; mode "default"
-        bindsym d exec sudo systemctl poweroff; mode "default"
-        bindsym r exec sudo systemctl reboot; mode "default"
+    bindsym s exec sudo systemctl suspend; mode "default"
+    bindsym h exec sudo systemctl hibernate; mode "default"
+    bindsym d exec sudo systemctl poweroff; mode "default"
+    bindsym r exec sudo systemctl reboot; mode "default"
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+x mode "(s)leep (h)ybernate (r)estart shut(d)own"
 
@@ -162,7 +174,7 @@ assign [class="xbmc.bin"] 3 media
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        tray_output VGA1
+    tray_output VGA1
 #        status_command i3status
 #    status_command $HOME/.config/i3/conky-i3bar-g
     status_command $HOME/.config/i3/conky-i3bar-txt
