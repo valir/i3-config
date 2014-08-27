@@ -177,7 +177,8 @@ bar {
     tray_output VGA1
 #        status_command i3status
 #    status_command $HOME/.config/i3/conky-i3bar-g
-    status_command $HOME/.config/i3/conky-i3bar-txt
+#    status_command $HOME/.config/i3/conky-i3bar-txt
+    status_command $HOME/bin/lifebar
     colors {
         statusline #AAAAAA
         background #333333
