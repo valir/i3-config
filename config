@@ -22,6 +22,7 @@ bindsym $mod+Shift+a kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
+bindsym $mod+p exec passmenu --type
 
 # change focus
 bindsym $mod+h focus left
@@ -177,14 +178,14 @@ bar {
 #    tray_output VGA1
 #        status_command i3status
 #    status_command $HOME/.config/i3/conky-i3bar-g
-#    status_command $HOME/.config/i3/conky-i3bar-txt
-    i3bar_command $HOME/bin/lifebar
-#    colors {
-#        statusline #AAAAAA
-#        background #333333
-#        focused_workspace $gray2 $gray2 #FFFFFF
-#        inactive_workspace $gray1 $gray1 #AAAAAA
-#    }  
+    status_command $HOME/.config/i3/conky-i3bar-txt
+#    i3bar_command $HOME/bin/lifebar
+    colors {
+        statusline #AAAAAA
+        background #333333
+        focused_workspace $gray2 $gray2 #FFFFFF
+        inactive_workspace $gray1 $gray1 #AAAAAA
+    }  
 }
 
 exec_always --no-startup-id nm-applet
