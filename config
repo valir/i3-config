@@ -1,4 +1,4 @@
-
+# vim:filetype=i3
 exec dbus-launch dunst
 
 set $mod Mod4
@@ -146,14 +146,14 @@ bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
 bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 
 bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -c 111111 -d
-bindsym Control+Mod1+s exec i3-msg workspace 1 && i3lock && systemctl suspend
+bindsym $mod+Tab exec quickswitch.py  # see this https://github.com/OliverUv/quickswitch-for-i3
 
 mode  "(s)leep (h)ybernate (r)estart shut(d)own" {
 
-    bindsym s exec sudo systemctl suspend; mode "default"
-    bindsym h exec sudo systemctl hibernate; mode "default"
-    bindsym d exec sudo systemctl poweroff; mode "default"
-    bindsym r exec sudo systemctl reboot; mode "default"
+    bindsym s exec i3lock && sudo systemctl suspend; mode "default"
+    bindsym h exec i3lock && sudo systemctl hibernate; mode "default"
+    bindsym d exec i3lock && sudo systemctl poweroff; mode "default"
+    bindsym r exec i3lock && sudo systemctl reboot; mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -196,7 +196,6 @@ workspace "3 media" output eDP1
 workspace "4 net" output VGA1
 
 exec i3-msg "focus right; workspace 2 comm; exec --no-startup-id skype; exec no-startup-id urxvt -e ssh home; workspace 1 main; exec --no-startup-id urxvt -e mutt"
-
 
 exec_always --no-startup-id muzica.sh
 
