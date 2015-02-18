@@ -5,6 +5,7 @@ set $mod Mod4
 
 exec --no-startup-id ~/bin/lefthandmouse.sh
 exec --no-startup-id feh --bg-fill ~/Photo/scoici.jpg
+exec --no-startup-id remind -z -k'notify-send %s &' ~/.reminders &
 
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -58,7 +59,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+bindsym $mod+y layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -145,7 +146,7 @@ bindsym $mod+z workspace back_and_forth
 bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
 bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 
-bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -c 111111 -d
+bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -c 111111 -e
 bindsym $mod+Tab exec quickswitch.py  # see this https://github.com/OliverUv/quickswitch-for-i3
 
 mode  "(s)leep (h)ybernate (r)estart shut(d)own" {
@@ -160,14 +161,15 @@ mode  "(s)leep (h)ybernate (r)estart shut(d)own" {
 }
 bindsym $mod+x mode "(s)leep (h)ybernate (r)estart shut(d)own"
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 -- +10%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -- -10%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
 bindsym XF86AudioNext exec --no-startup-id mpc next
 bindsym XF86AudioPrev exec --no-startup-id mpc prev
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86HomePage exec i3-msg "workspace 1 mail; exec --no-startup-id urxvt -e mutt"
-bindsym XF86Tools exec --no-startup-id urxvt -e ncmpcpp
+bindsym XF86Tools exec --no-startup-id urxvt -e ncmpcpp -h mititelu
 bindsym $mod+n exec --no-startup-id i3-rename-workspace
+bindsym $mod+w exec --no-startup-id urxvt -e wicd-curses
 
 assign [class="Skype"] 2 comm
 assign [class="xbmc.bin"] 3 media
@@ -188,14 +190,13 @@ bar {
     }  
 }
 
-exec_always --no-startup-id nm-applet
+#exec_always --no-startup-id nm-applet
 
 workspace "1 mail" output VGA1
 workspace "2 comm" output VGA1
 workspace "3 media" output eDP1
 workspace "4 net" output VGA1
 
-exec i3-msg "focus right; workspace 2 comm; exec --no-startup-id skype; exec no-startup-id urxvt -e ssh home; workspace 1 main; exec --no-startup-id urxvt -e mutt"
+#exec i3-msg "focus right; workspace 2 comm; exec --no-startup-id skype; exec no-startup-id urxvt -e ssh home; workspace 1 main; exec --no-startup-id urxvt -e mutt"
 
-exec_always --no-startup-id muzica.sh
 
