@@ -2,12 +2,18 @@
 exec dbus-launch dunst
 
 set $mod Mod4
+set $font_size 11
 
 exec --no-startup-id ~/bin/lefthandmouse.sh
-exec --no-startup-id feh --bg-fill ~/Photo/scoici.jpg
+exec --no-startup-id feh --bg-fill ~/Photo/durau.jpg
 exec --no-startup-id remind -z -k'notify-send %s &' ~/.reminders &
 
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font pango:Font Awesome $font_size
+#font pango:Lucida Grande $font_size
+font pango:Terminus $font_size
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -18,12 +24,16 @@ set $gray2 #333333
 # start a terminal
 bindsym $mod+Return exec "urxvt"
 
+# control mouse with the keyboard
+bindsym $mod+Escape exec iocane -i
+
 # kill focused window
 bindsym $mod+Shift+a kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
-bindsym $mod+p exec passmenu --type
+bindsym $mod+p exec kwallet-dmenu
+bindsym $mod+Shift+p exec kwallet-pwgen
 
 # change focus
 bindsym $mod+h focus left
@@ -111,34 +121,34 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window's width.
-        # Pressing right will grow the window's width.
-        # Pressing up will shrink the window's height.
-        # Pressing down will grow the window's height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+# Pressing left will shrink the window's width.
+# Pressing right will grow the window's width.
+# Pressing up will shrink the window's height.
+# Pressing down will grow the window's height.
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+# same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+# back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
 mode "workspaces" {
     bindsym t workspace next; mode "default"
-    bindSym T workspace prev; mode "default"
-    bindSym Escape mode "default"
+        bindSym T workspace prev; mode "default"
+        bindSym Escape mode "default"
 }
 bindsym $mod+g mode "workspaces"
 workspace_auto_back_and_forth yes
@@ -152,24 +162,34 @@ bindsym $mod+Tab exec quickswitch.py  # see this https://github.com/OliverUv/qui
 mode  "(s)leep (h)ybernate (r)estart shut(d)own" {
 
     bindsym s exec i3lock && sudo systemctl suspend; mode "default"
-    bindsym h exec i3lock && sudo systemctl hibernate; mode "default"
-    bindsym d exec i3lock && sudo systemctl poweroff; mode "default"
-    bindsym r exec i3lock && sudo systemctl reboot; mode "default"
+        bindsym h exec i3lock && sudo systemctl hibernate; mode "default"
+        bindsym d exec i3lock && sudo systemctl poweroff; mode "default"
+        bindsym r exec i3lock && sudo systemctl reboot; mode "default"
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
 }
 bindsym $mod+x mode "(s)leep (h)ybernate (r)estart shut(d)own"
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% && pkill -SIGRTMIN+10 i3blocks
 bindsym XF86AudioNext exec --no-startup-id mpc next
 bindsym XF86AudioPrev exec --no-startup-id mpc prev
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle
-bindsym XF86HomePage exec i3-msg "workspace 1 mail; exec --no-startup-id urxvt -e mutt"
+
+bindsym Control+XF86AudioRaiseVolume exec --no-startup-id mpc -h mititelu volume +5
+bindsym Control+XF86AudioLowerVolume exec --no-startup-id mpc -h mititelu volume -5
+bindsym Control+XF86AudioNext exec --no-startup-id mpc -h mititelu next
+bindsym Control+XF86AudioPrev exec --no-startup-id mpc -h mititelu prev
+bindsym Control+XF86AudioPlay exec --no-startup-id mpc -h mititelu toggle
+
+bindsym XF86HomePage exec i3-msg "workspace 1 ✉; exec --no-startup-id urxvt -e mutt"
 bindsym XF86Tools exec --no-startup-id urxvt -e ncmpcpp -h mititelu
 bindsym $mod+n exec --no-startup-id i3-rename-workspace
 bindsym $mod+w exec --no-startup-id urxvt -e wicd-curses
+
+bindsym Ctrl+$mod+F11 exec --no-startup-id setxkbmap fr && pkill -RTMIN+1 i3blocks
+bindsym Ctrl+$mod+F12 exec --no-startup-id setxkbmap ro && pkill -RTMIN+1 i3blocks
 
 assign [class="Skype"] 2 comm
 assign [class="xbmc.bin"] 3 media
@@ -178,25 +198,29 @@ assign [class="xbmc.bin"] 3 media
 # finds out, if available)
 bar {
 #    tray_output VGA1
-#        status_command i3status
+     # status_command i3status
+     status_command i3blocks
 #    status_command $HOME/.config/i3/conky-i3bar-g
-    status_command $HOME/.config/i3/conky-i3bar-txt
+# status_command $HOME/.config/i3/conky-i3bar-txt
 #    i3bar_command $HOME/bin/lifebar
-    colors {
-        statusline #AAAAAA
-        background #333333
-        focused_workspace $gray2 $gray2 #FFFFFF
-        inactive_workspace $gray1 $gray1 #AAAAAA
-    }  
+#        font pango:Font Awesome $font_size
+    font pango:Terminus $font_size
+        colors {
+            statusline #AAAAAA
+                background #333333
+                focused_workspace $gray2 $gray2 #FFFFFF
+                inactive_workspace $gray1 $gray1 #AAAAAA
+        }
 }
 
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 #exec_always --no-startup-id nm-applet
 
-workspace "1 mail" output VGA1
+#workspace "1 ✉" output VGA1
 workspace "2 comm" output VGA1
 workspace "3 media" output eDP1
 workspace "4 net" output VGA1
 
 #exec i3-msg "focus right; workspace 2 comm; exec --no-startup-id skype; exec no-startup-id urxvt -e ssh home; workspace 1 main; exec --no-startup-id urxvt -e mutt"
-
 
