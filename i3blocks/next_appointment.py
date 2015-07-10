@@ -39,7 +39,7 @@ try:
     latest_event = calendar.date_search(datetime.utcnow(), datetime.now().date() + timedelta(days=1))[-1]
     parse_eventdata(latest_event)
 except IndexError:
-    print "Nothing to do"
+    print "No appointements"
     exit(0)
 
 
