@@ -34,6 +34,11 @@ command= ~/.config/i3blocks/next_appointment.sh
 interval=300
 color=#00FF00
 
+[mails]
+command= ~/.config/i3blocks/mail_status.sh
+interval=once
+signal=12
+
 # Volume indicator
 #
 # The first parameter sets the step (and units to display)

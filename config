@@ -7,6 +7,7 @@ set $font_size 11
 exec --no-startup-id ~/bin/lefthandmouse.sh
 exec --no-startup-id feh --bg-fill ~/Photo/durau.jpg
 exec --no-startup-id remind -z -k'notify-send %s &' ~/.reminders &
+exec --no-startup-id ~/bin/mail-check.sh &
 
 
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
