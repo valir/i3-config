@@ -23,5 +23,5 @@ while true; do
      continue;
   }
   notmuch new
-  pkill -SIGTERM+12 i3blocks
+  pkill -SIGRTMIN+12 i3blocks
 done
