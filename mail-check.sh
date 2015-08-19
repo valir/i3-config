@@ -2,7 +2,7 @@
 
 OFFLINEIMAP=$(which offlineimap)
 while true; do
-  MBOX=$( timeout --signal=KILL 35m python /home/valentin/bin/mail-idle.py ) || {
+  MBOX=$( timeout --signal=KILL 35m python3 /home/valentin/bin/mail-idle.py ) || {
       echo "idle timed out" >&2;
       MBOX="TIMEOUT";
     }
