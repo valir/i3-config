@@ -24,20 +24,25 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=/usr/libexec/i3blocks/$BLOCK_NAME
+command=/usr/local/libexec/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-[appointment]
-# label=RDV
-command= ~/.config/i3blocks/next_appointment.sh
-interval=300
-color=#00FF00
+# [appointment]
+# # label=RDV
+# command= ~/.config/i3blocks/next_appointment.sh
+# interval=300
+# color=#00FF00
 
-[mails]
-command= ~/.config/i3blocks/mail_status.sh
-interval=once
-signal=12
+# [mails]
+# command= ~/.config/i3blocks/mail_status.sh
+# interval=once
+# signal=12
+
+# [music]
+# label=♪
+# command=mpc current
+# interval=10
 
 # Volume indicator
 #
@@ -45,21 +50,29 @@ signal=12
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-label=VOL
-#label=♪
+# label=VOL
+label=♪
 instance=130/5
 interval=once
-command=~/.config/i3blocks/i3blocks-volume-pulse
+command= ~/.config/i3blocks/i3blocks-volume-pulse
 signal=10
 
-[mic]
-command=~/.config/i3blocks/mic
-color=#FFFFFF
-interval=20
+[movidius]
+interval=once
+command= ~/movidius/vpn/i3block 
+
+# [headset]
+# interval=60
+# command= ~/.config/i3blocks/i3blocks-btheadset "00:18:09:29:FF:56"
+
+# [mic]
+# command=~/.config/i3blocks/mic
+# color=#FFFFFF
+# interval=20
 
 # Memory usage
 #
-# The type defaults to "mem" if the instance is not specified.
+#The type defaults to "mem" if the instance is not specified.
 [memory]
 label=MEM
 separator=false
@@ -76,23 +89,23 @@ interval=30
 # The directory defaults to $HOME if the instance is not specified.
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
-[disk]
-label=HOME
-#instance=/mnt/data
-interval=30
+# [disk]
+# label=HOME
+# #instance=/mnt/data
+# interval=30
 
 # Network interface monitoring
 #
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
-#instance=wlan0
+# instance=enp0s31f6
 color=#00FF00
 interval=10
 separator=false
 
 [wifi]
-#instance=wlp3s0
+instance=wlp2s0
 interval=10
 separator=false
 
@@ -108,18 +121,18 @@ interval=5
 label=CPU
 interval=10
 min_width=CPU: 100.00%
-#separator=false
+separator=false
 
-#[load_average]
-#interval=10
-
+[load_average]
+interval=10
+#
 # Battery indicator
 #
 # The battery instance defaults to 0.
 [battery]
 label=BAT
-#label=⚡
-#instance=1
+label=⚡
+instance=0
 interval=30
 
 [temperature]

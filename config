@@ -2,18 +2,28 @@
 exec dbus-launch dunst
 
 set $mod Mod4
-set $font_size 11
+set $font_size 10
+set $terminal urxvt256c-ml
 
-exec --no-startup-id ~/bin/lefthandmouse.sh
-exec --no-startup-id feh --bg-fill ~/Photo/durau.jpg
-exec --no-startup-id remind -z -k'notify-send %s &' ~/.reminders &
+exec --no-startup-id feh --bg-fill /usr/share/wallpapers/Autumn/contents/images/3008x2000.jpg
+exec --no-startup-id nm-applet &
 exec --no-startup-id ~/bin/mail-check.sh &
+bindsym $mod+Ctrl+m exec --no-startup-id ~/bin/mail-check.sh &
 
+exec --no-startup-id i3-msg "workspace 1; append_layout /home/vrusu/.config/i3/w1.json"
+exec --no-startup-id i3-msg "workspace 2; append_layout /home/vrusu/.config/i3/w2.json"
+exec --no-startup-id /usr/bin/skype &
+exec --no-startup-id /usr/bin/sky &
+exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "3" --command /usr/bin/pavucontrol &
+exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "4" --command /usr/bin/firefox &
+# exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "5" --command $terminal &
+# exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "6" --command $terminal &
+# exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "7" --command $terminal &
+# exec python /usr/lib/python2.7/site-packages/powerline/bindings/lemonbar/powerline-lemonbar.py --height 16 --i3
 
-#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-#font pango:Font Awesome $font_size
-#font pango:Lucida Grande $font_size
-font pango:Terminus $font_size
+exec --no-startup-id mpd
+
+font pango:monofur for Powerline Plus Nerd File Types Mono Plus Font Awesome Plus Octicons Plus Pomicons $font_size
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -23,7 +33,7 @@ set $gray1 #484848
 set $gray2 #333333
 
 # start a terminal
-bindsym $mod+Return exec "urxvt"
+bindsym $mod+Return exec "$terminal"
 
 # control mouse with the keyboard
 bindsym $mod+Escape exec iocane -i
@@ -87,10 +97,10 @@ bindsym $mod+q focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace number 1 mail
-bindsym $mod+2 workspace number 2 comm
-bindsym $mod+3 workspace number 3 media
-bindsym $mod+4 workspace number 4 net
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
 bindsym $mod+5 workspace number 5
 bindsym $mod+6 workspace number 6
 bindsym $mod+7 workspace number 7
@@ -99,19 +109,22 @@ bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
 
 # move focused container to workspace
-bindsym $mod+Shift+ampersand move container to workspace number 1 mail
-bindsym $mod+Shift+eacute move container to workspace number 2 comm
-bindsym $mod+Shift+quotedbl move container to workspace number 3 media
-bindsym $mod+Shift+apostrophe move container to workspace number 4 net
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
 bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+minus move container to workspace number 6
-bindsym $mod+Shift+egrave move container to workspace number 7
-bindsym $mod+Shift+underscore move container to workspace 8
-bindsym $mod+Shift+ccedilla move container to workspace 9
-bindsym $mod+Shift+agrave move container to workspace 10
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
 bindsym $mod+Control+Left move workspace to output left
 bindsym $mod+Control+Right move workspace to output right
+bindsym $mod+Control+Up move workspace to output up
+bindsym $mod+Control+Down move workspace to output down
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -157,7 +170,8 @@ bindsym $mod+z workspace back_and_forth
 bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
 bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 
-bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -c 111111 -e
+bindsym Control+Mod1+l exec i3-msg workspace 11 && i3lock -c 111111 -e
+bindsym $mod+u exec $terminal -e ncmpcpp
 bindsym $mod+Tab exec quickswitch.py  # see this https://github.com/OliverUv/quickswitch-for-i3
 
 mode  "(s)leep (h)ybernate (r)estart shut(d)own" {
@@ -184,28 +198,23 @@ bindsym Control+XF86AudioNext exec --no-startup-id mpc -h mititelu next
 bindsym Control+XF86AudioPrev exec --no-startup-id mpc -h mititelu prev
 bindsym Control+XF86AudioPlay exec --no-startup-id mpc -h mititelu toggle
 
-bindsym XF86HomePage exec i3-msg "workspace 1 ✉; exec --no-startup-id urxvt -e mutt"
-bindsym XF86Tools exec --no-startup-id urxvt -e ncmpcpp -h mititelu
+bindsym XF86HomePage exec i3-msg "workspace 1 ✉; exec --no-startup-id $terminal -e mutt"
+bindsym XF86Tools exec --no-startup-id $terminal -e ncmpcpp -h mititelu
 bindsym $mod+n exec --no-startup-id i3-rename-workspace
-bindsym $mod+w exec --no-startup-id urxvt -e wicd-curses
+bindsym $mod+w exec --no-startup-id $terminal -e wicd-curses
 
-bindsym Ctrl+$mod+F11 exec --no-startup-id setxkbmap fr && pkill -RTMIN+1 i3blocks
+bindsym Ctrl+$mod+F11 exec --no-startup-id setxkbmap us && pkill -RTMIN+1 i3blocks
 bindsym Ctrl+$mod+F12 exec --no-startup-id setxkbmap ro && pkill -RTMIN+1 i3blocks
 
-assign [class="Skype"] 2 comm
-assign [class="xbmc.bin"] 3 media
+assign [class="Skype"] 1
+assign [class="Sky"] 1
+assign [class="Evolution"] 2
+assign [class="Pavucontrol"] 3
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
-#    tray_output VGA1
-     # status_command i3status
-     status_command i3blocks
-#    status_command $HOME/.config/i3/conky-i3bar-g
-# status_command $HOME/.config/i3/conky-i3bar-txt
-#    i3bar_command $HOME/bin/lifebar
-#        font pango:Font Awesome $font_size
-    font pango:Terminus $font_size
+    tray_output DP-3
+    status_command SCRIPT_DIR=~/progs/i3blocks-contrib i3blocks
+    font pango:monofur for Powerline Plus Nerd File Types Mono Plus Font Awesome Plus Octicons Plus Pomicons $font_size
         colors {
             statusline #AAAAAA
                 background #333333
@@ -214,14 +223,22 @@ bar {
         }
 }
 
+# bar {
+#     i3_bar_command ~/.config/i3/lemonbar.sh
+#     font pango:monofur for Powerline Plus Nerd File Types Mono Plus Font Awesome Plus Octicons Plus Pomicons $font_size
+#         colors {
+#             statusline #AAAAAA
+#                 background #333333
+#                 focused_workspace $gray2 $gray2 #FFFFFF
+#                 inactive_workspace $gray1 $gray1 #AAAAAA
+#         }
+# }
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 #exec_always --no-startup-id nm-applet
 
 #workspace "1 ✉" output VGA1
-workspace "2 comm" output VGA1
-workspace "3 media" output eDP1
-workspace "4 net" output VGA1
-
-#exec i3-msg "focus right; workspace 2 comm; exec --no-startup-id skype; exec no-startup-id urxvt -e ssh home; workspace 1 main; exec --no-startup-id urxvt -e mutt"
+workspace "2" output VGA-1
+workspace "3" output HDMI-1
+workspace "4" output VGA-1
 
