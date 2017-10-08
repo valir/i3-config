@@ -160,13 +160,14 @@ instance=NUM
 interval=once
 signal=11
 
-[layout]
-command=~/.config/i3blocks/keyboard.sh
-interval=once
-signal=1
+[appointment]
+command= ~/.config/i3blocks/next_appointment.sh
+interval=300
 
-# Date Time
-#
+[weather]
+command= ~/.config/i3blocks/weather.sh Lyon
+interval=600
+
 [time]
 command=date '+%Y-%m-%d %H:%M:%S'
 interval=10
