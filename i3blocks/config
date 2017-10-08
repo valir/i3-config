@@ -39,10 +39,20 @@ markup=none
 # interval=once
 # signal=12
 
-# [music]
-# label=♪
-# command=mpc current
-# interval=10
+[music]
+label=♪
+command= ~/.config/i3blocks/mpd-status
+interval=10
+
+[music]
+label=♪
+command=mpc current
+interval=10
+
+# [dunst]
+# command=~/.config/i3blocks/notify
+# signal=12
+
 
 # Volume indicator
 #
@@ -57,13 +67,14 @@ interval=once
 command= ~/.config/i3blocks/i3blocks-volume-pulse
 signal=10
 
-[movidius]
+[mail]
 interval=once
-command= ~/movidius/vpn/i3block 
+command= ~/.config/i3blocks/i3blocks-mail-check
+signal=13
 
-# [headset]
-# interval=60
-# command= ~/.config/i3blocks/i3blocks-btheadset "00:18:09:29:FF:56"
+[headset]
+interval=60
+command= ~/.config/i3blocks/i3blocks-btheadset "00:18:09:29:FF:56"
 
 # [mic]
 # command=~/.config/i3blocks/mic
