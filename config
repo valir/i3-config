@@ -4,11 +4,11 @@ exec dbus-launch dunst
 set $mod Mod4
 set $font_size 10
 set $terminal urxvt256c-ml
+set $remote-mpd orfeu
 
 exec --no-startup-id feh --bg-fill /usr/share/wallpapers/Autumn/contents/images/3008x2000.jpg
 exec --no-startup-id nm-applet &
 exec --no-startup-id ~/bin/mail-check.sh &
-bindsym $mod+Ctrl+m exec --no-startup-id ~/bin/mail-check.sh &
 
 exec --no-startup-id i3-msg "workspace 1; append_layout /home/vrusu/.config/i3/w1.json"
 exec --no-startup-id i3-msg "workspace 2; append_layout /home/vrusu/.config/i3/w2.json"
@@ -16,6 +16,7 @@ exec --no-startup-id /usr/bin/skype &
 exec --no-startup-id /usr/bin/sky &
 exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "3" --command /usr/bin/pavucontrol &
 exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "4" --command /usr/bin/firefox &
+# exec --no-startup-id ~/intel/intel-scripts/intel-autoproxy.sh
 # exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "5" --command $terminal &
 # exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "6" --command $terminal &
 # exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "7" --command $terminal &
@@ -176,7 +177,7 @@ bindsym $mod+Tab exec quickswitch.py  # see this https://github.com/OliverUv/qui
 
 mode  "(s)leep (h)ybernate (r)estart shut(d)own" {
 
-    bindsym s exec i3lock && sudo systemctl suspend; mode "default"
+        bindsym s exec i3lock && sudo systemctl suspend; mode "default"
         bindsym h exec i3lock && sudo systemctl hibernate; mode "default"
         bindsym d exec i3lock && sudo systemctl poweroff; mode "default"
         bindsym r exec i3lock && sudo systemctl reboot; mode "default"
@@ -185,6 +186,19 @@ mode  "(s)leep (h)ybernate (r)estart shut(d)own" {
         bindsym Escape mode "default"
 }
 bindsym $mod+x mode "(s)leep (h)ybernate (r)estart shut(d)own"
+
+mode "mpd" {
+  bindsym XF86AudioRaiseVolume exec --no-startup-id mpc -h $remote-mpd volume +5
+  bindsym XF86AudioLowerVolume exec --no-startup-id mpc -h $remote-mpd volume -5
+  bindsym XF86AudioMute exec --no-startup-id mpc -h $remote-mpd volume 0
+  bindsym XF86AudioNext exec --no-startup-id mpc -h $remote-mpd next; mode default
+  bindsym XF86AudioPrev exec --no-startup-id mpc -h $remote-mpd prev; mode default
+  bindsym XF86AudioPlay exec --no-startup-id mpc -h $remote-mpd toggle; mode default
+  bindsym p exec $terminal -e ncmpcpp -h $remote-mpd
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+Control+m mode "mpd"
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% && pkill -SIGRTMIN+10 i3blocks
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% && pkill -SIGRTMIN+10 i3blocks
