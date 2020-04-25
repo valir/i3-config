@@ -24,7 +24,7 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=/usr/local/libexec/i3blocks/$BLOCK_NAME
+command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
@@ -34,20 +34,20 @@ markup=none
 # interval=300
 # color=#00FF00
 
-# [mails]
-# command= ~/.config/i3blocks/mail_status.sh
-# interval=once
-# signal=12
+[mails]
+command= ~/.config/i3blocks/mail_status.sh
+interval=once
+signal=12
 
-[music]
-label=♪
-command= ~/.config/i3blocks/mpd-status
-interval=10
+# [music]
+# label=♪
+# command= ~/.config/i3blocks/mpd-status
+# interval=10
 
-[music]
-label=♪
-command=mpc current
-interval=10
+# [music]
+# label=♪
+# command=mpc current
+# interval=10
 
 # [dunst]
 # command=~/.config/i3blocks/notify
@@ -59,22 +59,26 @@ interval=10
 # The first parameter sets the step (and units to display)
 # The second parameter overrides the mixer selection
 # See the script for details.
-[volume]
-# label=VOL
-label=♪
-instance=130/5
-interval=once
-command= ~/.config/i3blocks/i3blocks-volume-pulse
-signal=10
+# [volume]
+# # label=VOL
+# label=♪
+# instance=130/5
+# interval=once
+# command= ~/.config/i3blocks/i3blocks-volume-pulse
+# signal=10
 
 [mail]
 interval=once
 command= ~/.config/i3blocks/i3blocks-mail-check
 signal=13
 
+[keyboard]
+interval=60
+command= ~/.config/i3blocks/i3blocks-btheadset "DC:2C:26:CD:51:06" ""
+
 [headset]
 interval=60
-command= ~/.config/i3blocks/i3blocks-btheadset "00:18:09:29:FF:56"
+command= ~/.config/i3blocks/i3blocks-btheadset "00:18:09:29:FF:56" ""
 
 # [mic]
 # command=~/.config/i3blocks/mic
@@ -92,18 +96,8 @@ interval=30
 [memory]
 label=SWAP
 instance=swap
-separator=false
+# separator=false
 interval=30
-
-# Disk usage
-#
-# The directory defaults to $HOME if the instance is not specified.
-# The script may be called with a optional argument to set the alert
-# (defaults to 10 for 10%).
-# [disk]
-# label=HOME
-# #instance=/mnt/data
-# interval=30
 
 # Network interface monitoring
 #
@@ -121,8 +115,8 @@ interval=10
 separator=false
 
 [bandwidth]
-#instance=eth0
-interval=5
+instance=wlp2s0
+interval=1
 
 # CPU usage
 #
@@ -132,23 +126,27 @@ interval=5
 label=CPU
 interval=10
 min_width=CPU: 100.00%
-separator=false
 
-[load_average]
-interval=10
+# [load_average]
+# interval=10
 #
 # Battery indicator
 #
 # The battery instance defaults to 0.
 [battery]
 label=BAT
-label=⚡
-instance=0
+#instance=0
 interval=30
 
 [temperature]
 label=TEMP
-interval=10
+interval=5
+
+[layout]
+command=~/.config/i3blocks/keyboard.sh
+interval=once
+signal=1
+separator=false
 
 [keyindicator]
 instance=CAPS
@@ -160,36 +158,18 @@ instance=NUM
 interval=once
 signal=11
 
-[appointment]
-command= ~/.config/i3blocks/next_appointment.sh
-interval=300
+# [appointment]
+# command= ~/.config/i3blocks/next_appointment.sh
+# interval=300
 
 [weather]
-command= ~/.config/i3blocks/weather.sh Lyon
+# command= ~/.config/i3blocks/weather.sh Folsom
+# command= ~/.config/i3blocks/weather.sh Lyon
+#command= ~/.config/i3blocks/weather.sh "95054"
+command= ~/.config/i3blocks/weather.sh
 interval=600
 
 [time]
 command=date '+%Y-%m-%d %H:%M:%S'
 interval=10
 
-# Generic media player support
-#
-# This displays "ARTIST - SONG" if a music is playing.
-# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
-#[mediaplayer]
-#instance=spotify
-#interval=5
-#signal=10
-
-# OpenVPN support
-#
-# Support multiple VPN, with colors.
-#[openvpn]
-#interval=20
-
-# Key indicators
-#
-# Add the following bindings to i3 config file:
-#
-# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks

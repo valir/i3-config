@@ -1,33 +1,37 @@
 # vim:filetype=i3
-exec dbus-launch dunst
+
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [title="Microsoft Teams Notification"] floating enable; border none
+for_window [title="Bluetooth Devices"] floating enable; border none
+for_window [class="(?i)*nextcloud*"] floating disable
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 250px
+no_focus [class="plasmashell" window_type="notification"]
 
 set $mod Mod4
-set $font_size 10
-set $terminal urxvt256c-ml
+set $font_size 14
+# set $terminal urxvt
+set $terminal kitty
 set $remote-mpd orfeu
 
-exec --no-startup-id feh --bg-fill /usr/share/wallpapers/Autumn/contents/images/3008x2000.jpg
+new_window 1pixel
+
+exec --no-startup-id feh -Z --bg-fill ~/Photo/durau.jpg
 exec --no-startup-id nm-applet &
-exec --no-startup-id ~/bin/mail-check.sh &
-
-exec --no-startup-id i3-msg "workspace 1; append_layout /home/vrusu/.config/i3/w1.json"
-exec --no-startup-id i3-msg "workspace 2; append_layout /home/vrusu/.config/i3/w2.json"
-exec --no-startup-id /usr/bin/skype &
-exec --no-startup-id /usr/bin/sky &
-exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "3" --command /usr/bin/pavucontrol &
-exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "4" --command /usr/bin/firefox &
-# exec --no-startup-id ~/intel/intel-scripts/intel-autoproxy.sh
-# exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "5" --command $terminal &
-# exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "6" --command $terminal &
-# exec --no-startup-id ~/.config/i3/app-on-ws-init.py --workspace "7" --command $terminal &
-# exec python /usr/lib/python2.7/site-packages/powerline/bindings/lemonbar/powerline-lemonbar.py --height 16 --i3
-
-exec --no-startup-id mpd
 
 font pango:monofur for Powerline Plus Nerd File Types Mono Plus Font Awesome Plus Octicons Plus Pomicons $font_size
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+# mouse_warping none
 
 set $blue #005588
 set $gray1 #484848
@@ -44,8 +48,7 @@ bindsym $mod+Shift+a kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
-bindsym $mod+p exec kwallet-dmenu
-bindsym $mod+Shift+p exec kwallet-pwgen
+bindsym $mod+w exec kwallet-dmenu
 
 # change focus
 bindsym $mod+h focus left
@@ -171,21 +174,22 @@ bindsym $mod+z workspace back_and_forth
 bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
 bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 
-bindsym Control+Mod1+l exec i3-msg workspace 11 && i3lock -c 111111 -e
+bindsym Control+Mod1+l exec i3-msg workspace 11 && setxkbmap us && i3lock -c 111111 -e
 bindsym $mod+u exec $terminal -e ncmpcpp
 bindsym $mod+Tab exec quickswitch.py  # see this https://github.com/OliverUv/quickswitch-for-i3
 
-mode  "(s)leep (h)ybernate (r)estart shut(d)own" {
+mode  "(s)leep (h)ybernate (l)ogout (r)estart shut(d)own" {
 
-        bindsym s exec i3lock && sudo systemctl suspend; mode "default"
-        bindsym h exec i3lock && sudo systemctl hibernate; mode "default"
-        bindsym d exec i3lock && sudo systemctl poweroff; mode "default"
-        bindsym r exec i3lock && sudo systemctl reboot; mode "default"
+        bindsym s exec "i3lock && systemctl suspend"; mode "default"
+        bindsym h exec "i3lock && systemctl hibernate"; mode "default"
+        bindsym d exec "i3lock && systemctl poweroff"; mode "default"
+        bindsym r exec "i3lock && systemctl reboot"; mode "default"
+        bindsym l exec kdelogout.sh
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+x mode "(s)leep (h)ybernate (r)estart shut(d)own"
+bindsym $mod+x mode "(s)leep (h)ybernate (l)ogout (r)estart shut(d)own"
 
 mode "mpd" {
   bindsym XF86AudioRaiseVolume exec --no-startup-id mpc -h $remote-mpd volume +5
@@ -194,14 +198,14 @@ mode "mpd" {
   bindsym XF86AudioNext exec --no-startup-id mpc -h $remote-mpd next; mode default
   bindsym XF86AudioPrev exec --no-startup-id mpc -h $remote-mpd prev; mode default
   bindsym XF86AudioPlay exec --no-startup-id mpc -h $remote-mpd toggle; mode default
-  bindsym p exec $terminal -e ncmpcpp -h $remote-mpd
+  bindsym p exec $terminal -e ncmpcpp -h $remote-mpd; mode default
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
 bindsym $mod+Control+m mode "mpd"
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% && pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
 bindsym XF86AudioNext exec --no-startup-id mpc next
 bindsym XF86AudioPrev exec --no-startup-id mpc prev
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle
@@ -214,45 +218,38 @@ bindsym Control+XF86AudioPlay exec --no-startup-id mpc -h mititelu toggle
 
 bindsym XF86HomePage exec i3-msg "workspace 1 ✉; exec --no-startup-id $terminal -e mutt"
 bindsym XF86Tools exec --no-startup-id $terminal -e ncmpcpp -h mititelu
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym $mod+n exec --no-startup-id i3-rename-workspace
-bindsym $mod+w exec --no-startup-id $terminal -e wicd-curses
+bindsym Shift+$mod+w exec --no-startup-id VBoxManage startvm "W10"
 
-bindsym Ctrl+$mod+F11 exec --no-startup-id setxkbmap us && pkill -RTMIN+1 i3blocks
-bindsym Ctrl+$mod+F12 exec --no-startup-id setxkbmap ro && pkill -RTMIN+1 i3blocks
+bindsym Ctrl+$mod+F10 exec --no-startup-id setxkbmap fr
+bindsym Ctrl+$mod+F11 exec --no-startup-id setxkbmap us
+bindsym Ctrl+$mod+F12 exec --no-startup-id setxkbmap ro
 
-assign [class="Skype"] 1
-assign [class="Sky"] 1
-assign [class="Evolution"] 2
+assign [class="Insync"] 1
+assign [class="Microsoft Teams - Preview"] 1
+assign [class="Thunderbird"] 2
 assign [class="Pavucontrol"] 3
 
 bar {
-    tray_output DP-3
-    status_command SCRIPT_DIR=~/progs/i3blocks-contrib i3blocks
-    font pango:monofur for Powerline Plus Nerd File Types Mono Plus Font Awesome Plus Octicons Plus Pomicons $font_size
-        colors {
-            statusline #AAAAAA
-                background #333333
-                focused_workspace $gray2 $gray2 #FFFFFF
-                inactive_workspace $gray1 $gray1 #AAAAAA
-        }
+    font pango:monofur for Powerline Plus Nerd File Types Mono Plus Font Awesome Plus Octicons Plus Pomicons 12
+    position bottom
+    status_command ${HOME}/bin/i3status-rs ~/.config/i3/status.toml
+    colors {
+        separator #666666
+        background #222222
+        statusline #dddddd
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #ffffff
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace #2f343a #900000 #ffffff
+    }
 }
 
-# bar {
-#     i3_bar_command ~/.config/i3/lemonbar.sh
-#     font pango:monofur for Powerline Plus Nerd File Types Mono Plus Font Awesome Plus Octicons Plus Pomicons $font_size
-#         colors {
-#             statusline #AAAAAA
-#                 background #333333
-#                 focused_workspace $gray2 $gray2 #FFFFFF
-#                 inactive_workspace $gray1 $gray1 #AAAAAA
-#         }
-# }
-bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-#exec_always --no-startup-id nm-applet
 
-#workspace "1 ✉" output VGA1
-workspace "2" output VGA-1
-workspace "3" output HDMI-1
-workspace "4" output VGA-1
+# workspace "1" output DP-6.3
+# workspace "2" output VGA-1
+# workspace "3" output HDMI-1
+# workspace "4" output VGA-1
 

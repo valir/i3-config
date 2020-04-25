@@ -1,16 +1,32 @@
 
-#!/bin/bash 
+#!/bin/bash
 
 METRIC=1 #Should be 0 or 1; 0 for F, 1 for C
- 
-if [ -z $1 ]; then
-echo
-echo "USAGE: weather.sh <locationcode>"
-echo
-exit 0;
+WEATHER_LOC_FILE=~/.config/i3blocks/weather-loc
+
+function change_location() {
+  cd ~/.config/i3blocks
+  LOC=$(zenity --list --title "Location" --text "Choose location" \
+    --column $(cat weather-locations))
+  echo $LOC > $WEATHER_LOC_FILE
+}
+
+case $BLOCK_BUTTON in
+  3)
+    change_location
+  ;;
+esac
+
+if [ -f $WEATHER_LOC_FILE ] ; then
+  LOC=$(cat $WEATHER_LOC_FILE)
+else
+  LOC="Lyon"
+  echo $LOC > $WEATHER_LOC_FILE
 fi
 
-curl -s http://rss.accuweather.com/rss/liveweather_rss.asp\?metric\=${METRIC}\&locCode\=$1 | perl -ne 'use utf8; if (/Currently/) {chomp;/\<title\>Currently: (.*)?\<\/title\>/; my @values=split(":",$1); if( $values[0] eq "Sunny" || $values[0] eq "Mostly Sunny" || $values[0] eq "Partly Sunny" || $values[0] eq "Intermittent Clouds" || $values[0] eq "Hazy Sunshine" || $values[0] eq "Hazy Sunshine" || $values[0] eq "Hot") 
+WEATHER_URL=http://rss.accuweather.com/rss/liveweather_rss.asp\?metric\=${METRIC}\&locCode\=$LOC
+
+curl -s $WEATHER_URL | perl -ne 'use utf8; if (/Currently/) {chomp;/\<title\>Currently: (.*)?\<\/title\>/; my @values=split(":",$1); if( $values[0] eq "Sunny" || $values[0] eq "Mostly Sunny" || $values[0] eq "Partly Sunny" || $values[0] eq "Intermittent Clouds" || $values[0] eq "Hazy Sunshine" || $values[0] eq "Hazy Sunshine" || $values[0] eq "Hot") 
 {
 my $sun = "";
 binmode(STDOUT, ":utf8");
