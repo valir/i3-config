@@ -1,0 +1,34 @@
+[url "git://anongit.kde.org/"]
+   insteadOf = kde:
+[url "ssh://git@git.kde.org/"]
+   pushInsteadOf = kde:
+[url "git@git.kde.org:"]
+	pushInsteadOf = kde:
+[branch "develop"]
+	remote = origin
+	merge = refs/heads/develop
+  autosetuprebase = always
+[user]
+	email = valir@rusu.info
+	name = Valentin Rusu
+[push]
+	default = simple
+[color]
+	ui = auto
+[core]
+	autocrlf = input
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+[diff]
+  tool = vimdiff
+[alias]
+  pl = pull --rebase
+
+[http]
+	lowSpeedLimit = 1000
+	lowSpeedTime = 600
+[branch]
+	autosetuprebase = always

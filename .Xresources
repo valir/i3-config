@@ -1,0 +1,161 @@
+xcursor.theme:    Vanilla-DMZ-AA
+
+#define S_base03        #002b36
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+#define S_green         #859900
+
+*background:            S_base03
+*foreground:            S_base00
+*fading:                40
+*fadeColor:             S_base03
+*cursorColor:           S_base1
+*pointerColorBackground:S_base01
+*pointerColorForeground:S_base1
+
+!! black dark/light
+*color0:                S_base02
+*color8:                S_base03
+
+!! red dark/light
+*color1:                S_red
+*color9:                S_orange
+
+!! green dark/light
+*color2:                S_green
+*color10:               S_base01
+
+!! yellow dark/light
+*color3:                S_yellow
+*color11:               S_base00
+
+!! blue dark/light
+*color4:                S_blue
+*color12:               S_base0
+
+!! magenta dark/light
+*color5:                S_magenta
+*color13:               S_violet
+
+!! cyan dark/light
+*color6:                S_cyan
+*color14:               S_base1
+
+!! white dark/light
+*color7:                S_base2
+*color15:               S_base3
+
+
+
+
+URxvt.colorIT:      #87af5f
+URxvt.colorBD:      #d7d7d7
+URxvt.colorUL:      #87afd7
+
+URxvt.transparent:   true
+URxvt.shading:       15
+URxvt.intensityStyles: false
+
+
+
+!urxvt fonts: 
+
+! URxvt*font: xft:Monospace:pixelsize=16
+! URxvt*boldFont: xft:Monospace:bold:pixelsize=16
+
+! use all-in-one terminus font
+! URxvt*font: xft:Terminus:pixelsize=16:encoding=combined
+! URxvt*boldFont: xft:Terminus:pixelsize=16
+
+! URxvt*font: xft:fontawesome:pixelsize=16
+! URxvt*boldFont: xft:fontawesome:pixelsize=16
+
+! URxvt*font: xft:Luculent:pixelsize=16:antialias=true:hinting=true
+! URxvt*boldFont: xft:Luculent:pixelsize=16:antialias=true:hinting=true
+
+! URxvt.font: xft:DejaVu Sans Mono for Powerline:size=12:antialias=true:hinting=true
+! URxvt.boldFont: xft:DejaVu Sans Mono for Powerline:size=12:antialias=true:hinting=true
+
+! URxvt*font: xft:Droid Sans Mono for Powerline Plus Nerd File Types Mono:size=11:hinting=true
+! URxvt*boldFont: xft:Droid Sans Mono for Powerline Plus Nerd File Types Mono:bold:size=11:hinting=true
+URxvt*font: xft:monofur for Powerline Plus Nerd File Types Mono Plus Font Awesome Plus Octicons:size=16:hinting=true
+URxvt*boldFont: xft:monofur for Powerline Plus Nerd File Types Mono Plus Font Awesome Plus Octicons:bold:size=16:hinting=true
+! URxvt*font: xft:Pragmata Pro For Powerline Plus Nerd File Types:size=11
+! URxvt*boldFont: xft:Pragmata Pro For Powerline Plus Nerd File Types:bold:size=11
+
+! Uxvt*font: xft:Inconsolata:pixelsize=16:antialias=true:hinting=true
+! Uxvt*boldFont: xft:Inconsolata:pixelsize=16:antialias=true:hinting=true
+
+! Uxvt*font: xft:Droid Sans Mono:pixelsize=32
+! URxvt*boldFont: xft:Droid Sans Mono:bold:pixelsize=32
+
+! URxvt*font: xft:Hermit:style=medium:pixelsize=13:antialias=true:hinting=true
+! URxvt*boldFont: xft:Hermit:style=bold:pixelsize=13:antialias=true:hinting=true
+
+!urxvt extensions:
+
+URxvt*perl-ext-common:  default,matcher,keyboard-select,url-select,font-size
+
+
+!enabling clickable links:
+
+URxvt*urlLauncher:      /usr/bin/firefox
+URxvt*matcher.button:   1 
+
+!urxvt scrolling options and cursor style:
+
+URxvt*saveLines: 12000
+URxvt*scrollstyle:plain
+URxvt*scrollBar: false
+URxvt*cursorBlink: true
+URxvt*cursorUnderline: false
+
+! urxvt tabs settings:
+
+!URxvt*tabbed.tabbar-fg: 2
+!URxvt*tabbed.tabbar-bg: 0
+!URxvt*tabbed.tab-fg: 2
+!URxvt*tabbed.tab-bg: 8
+!URxvt*tabbed.autohide:  yes
+!URxvt*tabbed.new-button:  no
+!URxvt*tabbed.title: no
+
+URxvt*loginShell: true
+
+XTerm*bellIsUrgent: true
+URxvt*urgentOnBell: true
+
+
+URxvt*keysym.M-Escape: perl:keyboard-select:activate
+URxvt*keysym.M-s: perl:keyboard-select:search
+URxvt*keysym.M-c:   perl:clipboard:copy
+URxvt*keysym.M-v:   perl:clipboard:paste
+URxvt*keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt*keysym.M-u: perl:url-select:select_next
+URxvt*url-select.autocopy: true
+URxvt*url-select.underline: true
+
+
+! font size on the fly
+!
+URxvt*iso14755: False
+URxvt*iso14755_52: False
+URxvt.keysym.C-S-Up:     perl:font-size:increase
+URxvt.keysym.C-S-Down:   perl:font-size:decrease
+
+! cwd-span
+URxvt*perl-lib: /home/user/.urxvt
+URxvt*perl-ext: cwd-spawn
+URxvt*keysym.M-o: perl:cwd-spawn

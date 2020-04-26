@@ -1,0 +1,63 @@
+[theme]
+name = "solarized-dark"
+icons = "awesome"
+
+[theme.overrides]
+separator = ""
+
+[[block]]
+block = "net"
+device = "wlp5s0"
+ssid = true
+signal_strength = true
+ip = true
+speed_up = true
+graph_down = true
+interval = 5
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mup}%"
+format_swap = "{SUp}%"
+
+[[block]]
+block = "cpu"
+interval = 2
+
+[[block]]
+block = "load"
+interval = 2
+format = "{1m}"
+
+[[block]]
+block = "temperature"
+collapsed = false
+interval = 10
+format = "{average}°"
+chip = "*-isa-*"
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "battery"
+interval = 10
+format = "{percentage}% {time}"
+device = "BAT1"
+
+[[block]]
+block = "keyboard_layout"
+driver = "setxkbmap"
+interval = 15
+
+[[block]]
+block = "weather"
+format = "{weather} {temp}°, {wind} m/s {direction}"
+service = { name = "openweathermap", api_key = "1f1a2b725f975d035cff846aae00aaa1", city_id = "665087", units = "metric" }
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
+
